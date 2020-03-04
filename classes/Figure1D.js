@@ -1,0 +1,1 @@
+window.Figure1D =  class Figure1D extends Figure {}

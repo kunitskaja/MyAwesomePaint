@@ -1,0 +1,1 @@
+window.Segment = class Segment extends Ray {}

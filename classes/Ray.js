@@ -1,0 +1,1 @@
+window.Ray =  class Ray extends Line {}
