@@ -27,7 +27,8 @@ window.Ellipse = class Ellipse extends Figure2D {
         const deltaY = newPoint.y - this.location().y;
 
         this.setFirstPoint(Point.copy(this.getFirstPoint()).move(deltaX, deltaY));
-        this.setSecondPoint(Point.copy(this.getSecondPoint()).move(deltaX, deltaY))
+        this.setSecondPoint(Point.copy(this.getSecondPoint()).move(deltaX, deltaY));
+        this.setCenter(Point.copy(this.getFirstPoint()).move(deltaX, deltaY));
     }
 
     draw() {
