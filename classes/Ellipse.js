@@ -1,32 +1,41 @@
 window.Ellipse = class Ellipse extends Figure2D {
-  constructor(firstPoint, secondPoint, lineColor, fillColor) {
-    const center = Point.getMiddlePoint(firstPoint, secondPoint);
-    super(lineColor, center, fillColor);
-    this.firstPoint = firstPoint;
-    this.secondPoint = secondPoint;
-  }
+    constructor(lineColor, fillColor, upperLeftPoint, bottomRightPoint) {
+        const center = Point.getMiddlePoint(upperLeftPoint, bottomRightPoint);
+        super(lineColor, center, fillColor);
+        this.firstPoint = upperLeftPoint;
+        this.secondPoint = bottomRightPoint;
+    }
 
-  getFirstPoint() {
-    return this.firstPoint;
-  }
-  
-  getSecondPoint() {
-    return this.secondPoint;
-  }
+    getFirstPoint() {
+        return this.firstPoint;
+    }
 
-  setFirstPoint(point) {
-    this.firstPoint = point;
-  }
+    getSecondPoint() {
+        return this.secondPoint;
+    }
 
-  setSecondPoint(point) {
-    this.secondPoint = point;
-  }
+    setFirstPoint(point) {
+        this.firstPoint = point;
+    }
 
-  move(newPoint) {
-    const deltaX = newPoint.x - this.location().x;
-    const deltaY = newPoint.y - this.location().y;
+    setSecondPoint(point) {
+        this.secondPoint = point;
+    }
 
-    this.setFirstPoint(Point.copy(this.getFirstPoint()).move(deltaX, deltaY));
-    this.setSecondPoint(Point.copy(this.getSecondPoint()).move(deltaX, deltaY))
-  }
+    move(newPoint) {
+        const deltaX = newPoint.x - this.location().x;
+        const deltaY = newPoint.y - this.location().y;
+
+        this.setFirstPoint(Point.copy(this.getFirstPoint()).move(deltaX, deltaY));
+        this.setSecondPoint(Point.copy(this.getSecondPoint()).move(deltaX, deltaY))
+    }
+
+    draw() {
+        const canvas = document.querySelector('canvas');
+        const context = canvas.getContext('2d');
+        const xR = Math.abs(this.secondPoint.x - this.firstPoint.x) / 2;
+        const yR = Math.abs(this.secondPoint.y - this.firstPoint.y) / 2;
+        context.ellipse(this.center.x, this.center.y, xR, yR, 0, 0, 2 * Math.PI);
+        context.stroke();
+    }
 }

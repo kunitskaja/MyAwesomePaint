@@ -13,5 +13,5 @@ a.move(new Point(300, 200));
 // const points2 = [new Point(310, 0), new Point(60, 230), new Point(510, 602), new Point(110, 60), new Point(20, 310)];
 // const b = new Polygon(new Color(20, 140, 40), new Color(20, 40, 210), points2);
 
-const b = new Line(new Color(20, 140, 40), new Point(25, 20), new Point(27, 29));
+const b = new Circle(new Color(20, 140, 40), new Color(20, 140, 40), new Point(50, 50), new Point(70, 50));
 b.draw();

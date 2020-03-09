@@ -1,7 +1,9 @@
 window.Circle = class Circle extends Ellipse {
-    constructor(firstPoint, secondPoint, lineColor, fillColor) {
-        super(lineColor, firstPoint, fillColor);
-        this.secondPoint = secondPoint;
+    constructor(lineColor, fillColor, center, radPoint) {
+        const rad = Math.abs(center.x - radPoint.x);
+        const upperLeftPoint = new Point(center.x - rad, center.y - rad);
+        const bottomRightPoint = new Point(center.x + rad, center.y + rad);
+        super(lineColor, fillColor, upperLeftPoint, bottomRightPoint);
     }
 
     getFirstPoint() {
