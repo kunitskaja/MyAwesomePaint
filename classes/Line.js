@@ -9,13 +9,13 @@ window.Line = class Line extends Figure1D {
         const a = Q.y - P.y;
         const b = P.x - Q.x;
         const c = a * (P.x) + b * (P.y);
-
-        const X = new Point(c / a, 0);
-        const Y = new Point(0, c / b);
-
-        console.log(X);
-        console.log(Y);
-
+        if (c === 0) {
+            const X = new Point(0, 0);
+            const Y = c / a - b / a * 800 > 2000 ? new Point(2000, c / b - a / b * 2000) : new Point(c / a - b / a * 800, 800);
+            return {X, Y}
+        }
+        const Y = c / b < 0 ? new Point(2000, c / b - a / b * 2000) : new Point(0, c / b);
+        const X = c / a < 0 ? new Point(c / a - b / a * 800, 800) : new Point(c / a, 0);
         return {X, Y}
     };
 
