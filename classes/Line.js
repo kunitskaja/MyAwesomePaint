@@ -4,14 +4,26 @@ window.Line = class Line extends Figure1D {
         this.secondPoint = secondPoint;
     }
 
-    findAxisIntersections(Q, P) {
+    findAxisIntersections(firstPoint, secondPoint) {
         //https://www.geeksforgeeks.org/program-find-line-passing-2-points/
-        const a = Q.y - P.y;
-        const b = P.x - Q.x;
-        const c = a * (P.x) + b * (P.y);
-        if (c === 0) {
-            const X = new Point(0, 0);
-            const Y = c / a - b / a * 800 > 2000 ? new Point(2000, c / b - a / b * 2000) : new Point(c / a - b / a * 800, 800);
+        // ax + by = c
+        const a = firstPoint.y - secondPoint.y;
+        const b = secondPoint.x - firstPoint.x;
+        const c = a * (secondPoint.x) + b * (secondPoint.y);
+        if (a === 0) { // parallel to X
+            const X = new Point(0, firstPoint.y);
+            const Y = new Point(2000, firstPoint.y);
+            return {X, Y}
+        }
+        if (b === 0) { // parallel to Y
+            const X = new Point(firstPoint.x, 0);
+            const Y = new Point(firstPoint.x, 800);
+            return {X, Y}
+        }
+        if (c === 0) { // line includes (0, 0)
+            const outOfXBound = c / a - b / a * 800 > 2000;
+            const X = outOfXBound ? new Point(0, 0) : new Point(c / a - b / a * 800, 800);
+            const Y = outOfXBound ? new Point(2000, c / b - a / b * 2000) : new Point(0, 0);
             return {X, Y}
         }
         const Y = c / b < 0 ? new Point(2000, c / b - a / b * 2000) : new Point(0, c / b);

@@ -1,6 +1,23 @@
-
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
+
+let lineColor;
+let fillColor;
+
+lineColorPicker = document.getElementById("line");
+lineColorPicker.addEventListener("change", watchLineColorPicker, false);
+
+fillColorPicker = document.getElementById("fill");
+fillColorPicker.addEventListener("change", watchFillColorPicker, false);
+
+function watchLineColorPicker(event) {
+    lineColor = event.target.value;
+    const l = new Line(lineColor, new Point(100, 100), new Point(300, 150));
+    l.draw();
+}
+function watchFillColorPicker(event) {
+    fillColor = event.target.value;
+}
 
 const points = [new Point(30, 0), new Point(60, 30), new Point(50, 60), new Point(10, 60), new Point(0, 30)];
 
@@ -20,13 +37,17 @@ const points = [new Point(30, 0), new Point(60, 30), new Point(50, 60), new Poin
 // b.move(new Point(150, 150));
 // b.draw();
 
-const z = new Segment(new Color(20, 140, 40), new Point(100, 100), new Point(300, 500));
-const x = new Segment(new Color(20, 140, 40), new Point(300, 500), new Point(850, 600));
+// const l = new Line(lineColor, new Point(100, 100), new Point(300, 150));
+// l.draw();
+
+
+// const z = new Segment(new Color(20, 140, 40), new Point(100, 100), new Point(300, 500));
+// const x = new Segment(new Color(20, 140, 40), new Point(300, 500), new Point(850, 600));
 // b.draw();
 // b.move(new Point(900, 100));
 // b.draw();
 
-const b = new Polyline(new Color(20, 140, 40), [x, z]);
-b.draw();
-b.move(new Point(600, 300));
-b.draw();
+// const b = new Polyline(new Color(20, 140, 40), [x, z]);
+// b.draw();
+// b.move(new Point(600, 300));
+// b.draw();
