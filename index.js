@@ -20,5 +20,13 @@ const points = [new Point(30, 0), new Point(60, 30), new Point(50, 60), new Poin
 // b.move(new Point(150, 150));
 // b.draw();
 
-const b = new Ray(new Color(20, 140, 40), new Point(100, 100), new Point(50, 500));
+const z = new Segment(new Color(20, 140, 40), new Point(100, 100), new Point(300, 500));
+const x = new Segment(new Color(20, 140, 40), new Point(300, 500), new Point(850, 600));
+// b.draw();
+// b.move(new Point(900, 100));
+// b.draw();
+
+const b = new Polyline(new Color(20, 140, 40), [x, z]);
+b.draw();
+b.move(new Point(600, 300));
 b.draw();

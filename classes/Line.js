@@ -34,6 +34,7 @@ window.Line = class Line extends Figure1D {
         const newSecondPoint = Point.copy(this.secondPoint);
         newSecondPoint.move(deltaX, deltaY);
         this.setSecondPoint(newSecondPoint);
+        return this;
     }
 
     draw() {
@@ -46,4 +47,4 @@ window.Line = class Line extends Figure1D {
         context.lineTo(secondPoint.x, secondPoint.y);
         context.stroke();
     }
-}
+};
