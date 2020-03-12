@@ -7,19 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <select>
+  <canvas id="canvas" height="800" width="1600" style="border: 2px solid;"> </canvas>
+
+  <select id="figureSelector" onchange="onFigureSelect(event)">
     <option value="0">Select figure:</option>
-    <option value="1">Line</option>
-    <option value="2">Ray</option>
-    <option value="3">Segment</option>
-    <option value="4">Polyline</option>
-    <option value="5">Ellipse</option>
-    <option value="6">Circle</option>
-    <option value="7">Polygon</option>
-    <option value="8">Regular polygon</option>
-    <option value="9">Rectangle</option>
-    <option value="10">Triangle</option>
-    <option value="11">Rhombus</option>
+    <option value="Line">Line</option>
+    <option value="Ray">Ray</option>
+    <option value="Segment">Segment</option>
+    <option value="Polyline">Polyline</option>
+    <option value="Ellipse">Ellipse</option>
+    <option value="Circle">Circle</option>
+    <option value="Polygon">Polygon</option>
+    <option value="Regular polygon">Regular polygon</option>
+    <option value="Rectangle">Rectangle</option>
+    <option value="Triangle">Triangle</option>
+    <option value="Rhombus">Rhombus</option>
   </select>
 
   <div>
@@ -33,8 +35,6 @@
            value="#d3c5f2">
     <label for="line">Fill color</label>
   </div>
-
-  <canvas height="800" width="2000"> </canvas>
 </body>
 <!-- <script src="./node_modules/system.js"></script>
 <script>
