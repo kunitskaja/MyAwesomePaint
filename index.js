@@ -1,23 +1,50 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
-
 let lineColor;
+let clicks = [];
+
+const pointsNumber = new Map([
+        ['Line', 2],
+        ['Ray', 2],
+        ['Segment', 2],
+
+        ['Ellipse', 2],
+        ['Circle', 2],
+
+        ['Triangle', 3],
+        ['Rectangle', 2],
+        ['Regular polygon', 2],
+    ]
+);
+
+let currentFigure;
 let fillColor;
+
+// const figureSelector = document.getElementById("figureSelector");
+// figureSelector.addEventListener("click", onFigureSelect, false);
+// function onFigureSelect(event) {
+//     currentFigure = event.target.value;
+// }
+
+function watchLineColorPicker(event) {
+    lineColor = event.target.value;
+    const l = new Ray(lineColor, new Point(100, 100), new Point(300, 150));
+    l.draw();
+    const l2 = new Ray(lineColor, new Point(100, 100), new Point(150, 300));
+    l2.draw();
+
+}
+
+function watchFillColorPicker(event) {
+    fillColor = event.target.value;
+
+}
 
 lineColorPicker = document.getElementById("line");
 lineColorPicker.addEventListener("change", watchLineColorPicker, false);
 
 fillColorPicker = document.getElementById("fill");
 fillColorPicker.addEventListener("change", watchFillColorPicker, false);
-
-function watchLineColorPicker(event) {
-    lineColor = event.target.value;
-    const l = new Line(lineColor, new Point(100, 100), new Point(300, 150));
-    l.draw();
-}
-function watchFillColorPicker(event) {
-    fillColor = event.target.value;
-}
 
 const points = [new Point(30, 0), new Point(60, 30), new Point(50, 60), new Point(10, 60), new Point(0, 30)];
 
@@ -51,3 +78,33 @@ const points = [new Point(30, 0), new Point(60, 30), new Point(50, 60), new Poin
 // b.draw();
 // b.move(new Point(600, 300));
 // b.draw();
+
+function drawLine() {
+    canvas.addEventListener("click", onCanvasClick, false);
+    function onCanvasClick(event) {
+        clicks.push(new Point(event.offsetX, event.offsetY));
+        console.log(clicks);
+        clicks.forEach(click => click.draw());
+        if (clicks.length === 2) {
+            const line = new Line(new Color('#202020'), clicks[clicks.length - 2], clicks[clicks.length - 1]);
+            line.draw();
+            clicks.pop();
+            clicks.pop();
+        }
+    }
+}
+
+function drawRay() {
+    canvas.addEventListener("click", onCanvasClick, false);
+    function onCanvasClick(event) {
+        clicks.push(new Point(event.offsetX, event.offsetY));
+        console.log(clicks);
+        clicks.forEach(click => click.draw());
+        if (clicks.length === 2) {
+            const ray = new Ray(new Color('#202020'), clicks[clicks.length - 2], clicks[clicks.length - 1]);
+            ray.draw();
+            clicks.pop();
+            clicks.pop();
+        }
+    }
+}

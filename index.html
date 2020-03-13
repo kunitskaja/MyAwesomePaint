@@ -9,20 +9,34 @@
 <body>
   <canvas id="canvas" height="800" width="1600" style="border: 2px solid;"> </canvas>
 
-  <select id="figureSelector" onchange="onFigureSelect(event)">
-    <option value="0">Select figure:</option>
-    <option value="Line">Line</option>
-    <option value="Ray">Ray</option>
-    <option value="Segment">Segment</option>
-    <option value="Polyline">Polyline</option>
-    <option value="Ellipse">Ellipse</option>
-    <option value="Circle">Circle</option>
-    <option value="Polygon">Polygon</option>
-    <option value="Regular polygon">Regular polygon</option>
-    <option value="Rectangle">Rectangle</option>
-    <option value="Triangle">Triangle</option>
-    <option value="Rhombus">Rhombus</option>
-  </select>
+<!--  <select id="figureSelector" onchange="onFigureSelect(event)">-->
+<!--    <option value="0">Select figure:</option>-->
+<!--    <option value="Line">Line</option>-->
+<!--    <option value="Ray">Ray</option>-->
+<!--    <option value="Segment">Segment</option>-->
+<!--    <option value="Polyline">Polyline</option>-->
+<!--    <option value="Ellipse">Ellipse</option>-->
+<!--    <option value="Circle">Circle</option>-->
+<!--    <option value="Polygon">Polygon</option>-->
+<!--    <option value="Regular polygon">Regular polygon</option>-->
+<!--    <option value="Rectangle">Rectangle</option>-->
+<!--    <option value="Triangle">Triangle</option>-->
+<!--    <option value="Rhombus">Rhombus</option>-->
+<!--  </select>-->
+
+  <div>
+    <button value="Line" onclick="drawLine()">Line</button>
+    <button value="Ray" onclick="drawRay()">Ray</button>
+    <button value="Segment">Segment</button>
+    <button value="Polyline">Polyline</button>
+    <button value="Ellipse">Ellipse</button>
+    <button value="Circle">Circle</button>
+    <button value="Polygon">Polygon</button>
+    <button value="Regular polygon">Regular polygon</button>
+    <button value="Rectangle">Rectangle</button>
+    <button value="Triangle">Triangle</button>
+    <button value="Rhombus">Rhombus</button>
+  </div>
 
   <div>
     <input type="color" id="line" name="line"

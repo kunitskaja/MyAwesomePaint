@@ -20,6 +20,12 @@ window.Point = class Point {
     return this;
   }
 
+  draw() {
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    context.fillRect(this.x,this.y,3,3);
+  }
+
   static getMiddlePoint(...points) {
     const middlePointX = points.reduce((sum, point) => sum + point.x, 0) / points.length;
     const middlePointY = points.reduce((sum, point) => sum + point.y, 0) / points.length;
