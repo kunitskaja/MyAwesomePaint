@@ -128,8 +128,7 @@ window.Line = class Line extends Figure1D {
       const context = canvas.getContext('2d');
       const { first, second } = this.getDrawPoints(canvas.height, canvas.width);
       context.strokeStyle = this.getLineColor().toString();
-
-      console.log(first, second, context.strokeStyle);
+      context.beginPath();
       context.moveTo(first.x, first.y);
       context.lineTo(second.x, second.y);
       context.stroke();

@@ -1,8 +1,13 @@
 window.Polyline =  class Polyline extends Figure1D {
-    constructor(lineColor, segments) {
-        const center = Point.getMiddlePoint(segments.reduce(segment => segment.getCenter()));
+    constructor(lineColor, points) {
+        const center = Point.getMiddlePoint(points);
         super(lineColor, center);
-        this.segments = segments;
+        this.segments = [];
+        points.forEach(point => {
+            if (points.indexOf(point) !== points.length - 1) {
+                this.segments.push(new Segment(lineColor, point, points[points.indexOf(point) + 1]))
+            }
+        });
     }
 
     setSegments(newSegments) {
