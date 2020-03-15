@@ -29,6 +29,8 @@ window.Polygon = class Polygon extends Figure2D {
   draw() {
     const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
+    context.strokeStyle = this.getLineColor().toString();
+    context.fillStyle = this.getFillColor().toString();
     context.beginPath();
     this.points.forEach((point, index) => {
       if (!index) {
