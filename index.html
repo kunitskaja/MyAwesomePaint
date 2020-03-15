@@ -7,7 +7,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <canvas height="800" width="2000"> </canvas>
+  <canvas id="canvas" height="800" width="1600" style="border: 2px solid;"> </canvas>
+
+<!--  <select id="figureSelector" onchange="onFigureSelect(event)">-->
+<!--    <option value="0">Select figure:</option>-->
+<!--    <option value="Line">Line</option>-->
+<!--    <option value="Ray">Ray</option>-->
+<!--    <option value="Segment">Segment</option>-->
+<!--    <option value="Polyline">Polyline</option>-->
+<!--    <option value="Ellipse">Ellipse</option>-->
+<!--    <option value="Circle">Circle</option>-->
+<!--    <option value="Polygon">Polygon</option>-->
+<!--    <option value="Regular polygon">Regular polygon</option>-->
+<!--    <option value="Rectangle">Rectangle</option>-->
+<!--    <option value="Triangle">Triangle</option>-->
+<!--    <option value="Rhombus">Rhombus</option>-->
+<!--  </select>-->
+
+  <div style="margin-top: 30px">
+    <button onclick="drawLine()">Line</button>
+    <button onclick="drawRay()">Ray</button>
+    <button onclick="drawSegment()">Segment</button>
+    <button onclick="drawPolyline()">Polyline</button>
+    <button value="Ellipse">Ellipse</button>
+    <button value="Circle">Circle</button>
+    <button value="Polygon">Polygon</button>
+    <button value="Regular polygon">Regular polygon</button>
+    <button value="Rectangle">Rectangle</button>
+    <button value="Triangle">Triangle</button>
+    <button value="Rhombus">Rhombus</button>
+  </div>
+
+  <div>
+    <input type="color" id="line" name="line"
+           value="#976afb">
+    <label for="line">Line color</label>
+  </div>
+
+  <div>
+    <input type="color" id="fill" name="fill"
+           value="#d3c5f2">
+    <label for="line">Fill color</label>
+  </div>
 </body>
 <!-- <script src="./node_modules/system.js"></script>
 <script>
@@ -20,9 +61,10 @@
 <script src="./classes/Line.js"></script>
 <script src="./classes/Ray.js"></script>
 <script src="./classes/Segment.js"></script>
-<!--<script src="./classes/Polyline.js"></script>-->
-
+<script src="./classes/Polyline.js"></script>
 <script src="./classes/Figure2D.js"></script>
+<script src="./classes/Ellipse.js"></script>
+<script src="./classes/Circle.js"></script>
 <script src="./classes/Polygon.js"></script>
 <script src="./classes/RegularPolygon.js"></script>
 <script src="./classes/Rectangle.js"></script>

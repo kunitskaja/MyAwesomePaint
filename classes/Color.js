@@ -1,14 +1,16 @@
 window.Color = class RGBColor {
-  constructor(red, green, blue) {
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
+  constructor(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      this.red = parseInt(result[1], 16);
+      this.green = parseInt(result[2], 16);
+      this.blue = parseInt(result[3], 16);
   }
 
-  set(red, green, blue) {
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
+  set(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    this.red = parseInt(result[1], 16);
+    this.green = parseInt(result[2], 16);
+    this.blue = parseInt(result[3], 16);
   }
 
   toString() {

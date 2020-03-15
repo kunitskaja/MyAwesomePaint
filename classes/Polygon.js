@@ -16,10 +16,8 @@ window.Polygon = class Polygon extends Figure2D {
   move(newPoint) {
     const deltaX = newPoint.x - this.location().x;
     const deltaY = newPoint.y - this.location().y;
-
+    const newPoints = this.points.map(point => point.move(deltaX, deltaY));
     this.setCenter(newPoint);
-    const newPoints = points.map(point => point.move(deltaX, deltaY));
-
     this.setPoints(newPoints);
   }
 
