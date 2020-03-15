@@ -5,7 +5,6 @@ window.Figure = class Figure {
     this.lineColor = lineColor;
     this.center = center;
     context.lineWidth = LINE_WIDTH;
-    context.strokeStyle = this.getLineColor().toString();
   }
 
   draw() {};
