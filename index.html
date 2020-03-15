@@ -9,33 +9,19 @@
 <body>
   <canvas id="canvas" height="800" width="1600" style="border: 2px solid;"> </canvas>
 
-<!--  <select id="figureSelector" onchange="onFigureSelect(event)">-->
-<!--    <option value="0">Select figure:</option>-->
-<!--    <option value="Line">Line</option>-->
-<!--    <option value="Ray">Ray</option>-->
-<!--    <option value="Segment">Segment</option>-->
-<!--    <option value="Polyline">Polyline</option>-->
-<!--    <option value="Ellipse">Ellipse</option>-->
-<!--    <option value="Circle">Circle</option>-->
-<!--    <option value="Polygon">Polygon</option>-->
-<!--    <option value="Regular polygon">Regular polygon</option>-->
-<!--    <option value="Rectangle">Rectangle</option>-->
-<!--    <option value="Triangle">Triangle</option>-->
-<!--    <option value="Rhombus">Rhombus</option>-->
-<!--  </select>-->
-
-  <div style="margin-top: 30px">
-    <button onclick="drawLine()">Line</button>
-    <button onclick="drawRay()">Ray</button>
-    <button onclick="drawSegment()">Segment</button>
-    <button onclick="drawPolyline()">Polyline</button>
-    <button value="Ellipse">Ellipse</button>
-    <button value="Circle">Circle</button>
-    <button value="Polygon">Polygon</button>
-    <button value="Regular polygon">Regular polygon</button>
-    <button value="Rectangle">Rectangle</button>
-    <button value="Triangle">Triangle</button>
-    <button value="Rhombus">Rhombus</button>
+  <div>
+    <button id="Line" onclick="drawFigure1D(event)">Line</button>
+    <button id="Ray" onclick="drawFigure1D(event)">Ray</button>
+    <button id="Segment" onclick="drawFigure1D(event)">Segment</button>
+    <button id="Polyline" onclick="drawFigure1D(event)">Polyline</button>
+    <button id="Ellipse" onclick="drawFigure2D(event)">Ellipse</button>
+    <button id="Circle" onclick="drawFigure2D(event)">Circle</button>
+    <button id="Polygon" onclick="drawFigure2D(event)">Polygon</button>
+    <button id="RegularPolygon" onclick="drawRegularPolygon(event)">Regular polygon</button>
+    <button id="Rectangle" onclick="drawFigure2D(event)">Rectangle</button>
+    <button id="Triangle" onclick="drawFigure2D(event)">Triangle</button>
+    <button id="Rhombus" onclick="drawFigure2D(event)">Rhombus</button>
+    <button id="Move" onclick="move(event)" style="margin-left: 50px;">Move</button>
   </div>
 
   <div>
@@ -50,10 +36,6 @@
     <label for="line">Fill color</label>
   </div>
 </body>
-<!-- <script src="./node_modules/system.js"></script>
-<script>
-  System.import('./index.js');
-</script> -->
 <script src="./classes/Color.js"></script>
 <script src="./classes/Point.js"></script>
 <script src="./classes/Figure.js"></script>
