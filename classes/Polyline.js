@@ -1,5 +1,5 @@
 window.Polyline =  class Polyline extends Figure1D {
-    constructor(lineColor, points) {
+    constructor(lineColor, ...points) {
         const center = Point.getMiddlePoint(points);
         super(lineColor, center);
         this.segments = [];
@@ -24,6 +24,8 @@ window.Polyline =  class Polyline extends Figure1D {
         const newSegments = this.getSegments.map(segment => segment.move(new Point(segment.getCenter().x + deltaX, segment.getCenter().y + deltaY)));
         this.setCenter(newPoint);
         this.setSegments(newSegments);
+
+        return this;
     }
 
     draw() {

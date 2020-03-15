@@ -1,8 +1,11 @@
+const LINE_WIDTH = 2;
+
 window.Figure = class Figure {
   constructor(lineColor, center) {
     this.lineColor = lineColor;
     this.center = center;
-    context.lineWidth = 3;
+    context.lineWidth = LINE_WIDTH;
+    context.strokeStyle = this.getLineColor().toString();
   }
 
   draw() {};

@@ -75,6 +75,7 @@ window.Line = class Line extends Figure1D {
         const newSecondPoint = Point.copy(this.secondPoint);
         newSecondPoint.move(deltaX, deltaY);
         this.setSecondPoint(newSecondPoint);
+        
         return this;
     }
 
@@ -132,5 +133,6 @@ window.Line = class Line extends Figure1D {
       context.moveTo(first.x, first.y);
       context.lineTo(second.x, second.y);
       context.stroke();
+      context.closePath();
     }
 };

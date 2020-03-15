@@ -6,6 +6,6 @@ window.Rhombus =  class Rhombus extends Polygon {
     points.push(new Point(firstPoint.x, center.y));
     points.push(new Point(center.x, secondPoint.y));
     points.push(new Point(secondPoint.x, center.y));
-    super(lineColor, fillColor, points);
+    super(lineColor, fillColor, ...points);
   }
 };
