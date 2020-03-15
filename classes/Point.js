@@ -26,7 +26,7 @@ window.Point = class Point {
     context.fillRect(this.x - 1.5, this.y - 1.5, 3, 3);
   }
 
-  static getMiddlePoint(...points) {
+  static getMiddlePoint(points) {
     const middlePointX = points.reduce((sum, point) => sum + point.x, 0) / points.length;
     const middlePointY = points.reduce((sum, point) => sum + point.y, 0) / points.length;
 
