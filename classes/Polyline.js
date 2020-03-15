@@ -21,7 +21,7 @@ window.Polyline =  class Polyline extends Figure1D {
     move(newPoint) {
         const deltaX = newPoint.x - this.location().x;
         const deltaY = newPoint.y - this.location().y;
-        const newSegments = this.getSegments.map(segment => segment.move(new Point(segment.getCenter().x + deltaX, segment.getCenter().y + deltaY)));
+        const newSegments = this.getSegments().map(segment => segment.move(new Point(segment.getCenter().x + deltaX, segment.getCenter().y + deltaY)));
         this.setCenter(newPoint);
         this.setSegments(newSegments);
 
