@@ -1,5 +1,5 @@
 window.RegularPolygon = class RegularPolygon extends Polygon {
-  constructor(lineColor, fillColor, firstPoint, secondPoint, sidesNumber) {
+  constructor(lineColor, fillColor, sidesNumber, firstPoint, secondPoint) {
     const radius = Point.getDistance(firstPoint, secondPoint);
     const startAngle = Math.atan((secondPoint.y - firstPoint.y) / (secondPoint.x - firstPoint.x));
     const points = new Array(sidesNumber)
@@ -10,6 +10,6 @@ window.RegularPolygon = class RegularPolygon extends Polygon {
 
         return new Point(newPointX, newPointY);
       });
-    super(lineColor, fillColor, points);
+    super(lineColor, fillColor, ...points);
   }
 };

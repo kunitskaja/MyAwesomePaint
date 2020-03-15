@@ -1,50 +1,25 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
+
 let lineColor = "#976afb";
+let fillColor = "#d3c5f2";
+const drawnFigures = [];
 let clicks = [];
-canvas.addEventListener("click", onCanvasClick, false);
 
 function onCanvasClick(event) {
     clicks.push(new Point(event.offsetX, event.offsetY));
     clicks.forEach(click => click.draw());
 }
 
-const pointsNumber = new Map([
-        ['Line', 2],
-        ['Ray', 2],
-        ['Segment', 2],
-
-        ['Ellipse', 2],
-        ['Circle', 2],
-
-        ['Triangle', 3],
-        ['Rectangle', 2],
-        ['Regular polygon', 2],
-    ]
-);
-
-let currentFigure;
-let fillColor;
-
-// const figureSelector = document.getElementById("figureSelector");
-// figureSelector.addEventListener("click", onFigureSelect, false);
-// function onFigureSelect(event) {
-//     currentFigure = event.target.value;
-// }
-
 function watchLineColorPicker(event) {
     lineColor = event.target.value;
-    // const l = new Ray(lineColor, new Point(100, 100), new Point(300, 150));
-    // l.draw();
-    // const l2 = new Ray(lineColor, new Point(100, 100), new Point(150, 300));
-    // l2.draw();
-
 }
 
 function watchFillColorPicker(event) {
     fillColor = event.target.value;
-
 }
+
+canvas.addEventListener("click", onCanvasClick, true);
 
 lineColorPicker = document.getElementById("line");
 lineColorPicker.addEventListener("change", watchLineColorPicker, false);
@@ -52,58 +27,100 @@ lineColorPicker.addEventListener("change", watchLineColorPicker, false);
 fillColorPicker = document.getElementById("fill");
 fillColorPicker.addEventListener("change", watchFillColorPicker, false);
 
-const points = [new Point(30, 0), new Point(60, 30), new Point(50, 60), new Point(10, 60), new Point(0, 30)];
+class Figure1DFabric {
+  constructor() {
+    this.FIGURE_TYPE_MAP = {
+      Line,
+      Ray,
+      Segment,
+      Polyline,
+    };
+  }
 
-// console.log(points);
-// const a = new Polygon(new Color(250, 40, 40), new Color(20, 240, 40), points);
-//
-// a.move(new Point(300, 200));
-// a.draw();
+  get(type, lineColor, points) { 
+    const figureClass = this.FIGURE_TYPE_MAP[type];
 
-// const points2 = [new Point(310, 0), new Point(60, 230), new Point(510, 602), new Point(110, 60), new Point(20, 310)];
-// const b = new Rhombus(new Color(20, 140, 40), new Color(20, 40, 210), new Point(310, 0), new Point(60, 230));
-// b.move(new Point(150, 150));
-// b.move(new Point(350, 350));
-// b.draw();
-
-// const b = new Circle(new Color(20, 140, 40), new Color(20, 140, 40), new Point(50, 50), new Point(70, 150));
-// b.move(new Point(150, 150));
-// b.draw();
-
-// const b = new Polyline(new Color(20, 140, 40), [x, z]);
-// b.draw();
-// b.move(new Point(600, 300));
-// b.draw();
-
-function drawLine() {
-    if (clicks.length === 2) {
-        const line = new Line(lineColor, clicks[clicks.length - 2], clicks[clicks.length - 1]);
-        line.draw();
-        clicks.pop();
-        clicks.pop();
+    if (!figureClass) {
+      throw new Error('Figure type invalid');
     }
+
+    return new figureClass(lineColor, ...points);
+  }
 }
 
-function drawRay() {
-    if (clicks.length === 2) {
-        const ray = new Ray(lineColor, clicks[clicks.length - 2], clicks[clicks.length - 1]);
-        ray.draw();
-        clicks.pop();
-        clicks.pop();
+class Figure2DFabric {
+  constructor() {
+    this.FIGURE_TYPE_MAP = {
+      Ellipse,
+      Circle,
+      Polygon,
+      Rectangle,
+      Triangle,
+      Rhombus,
+    };
+  }
+
+  get(type, lineColor, fillColor, points) { 
+    const figureClass = this.FIGURE_TYPE_MAP[type];
+
+    if (!figureClass) {
+      throw new Error('Figure type invalid');
     }
+
+    return new figureClass(lineColor, fillColor, ...points);
+  }
 }
 
-function drawSegment() {
-    if (clicks.length === 2) {
-        const segment = new Segment(lineColor, clicks[clicks.length - 2], clicks[clicks.length - 1]);
-        segment.draw();
-        clicks.pop();
-        clicks.pop();
-    }
+function redraw(figures) {
+  context.clearRect(0,0, canvas.width, canvas.height);
+  figures.forEach(figure => figure.draw());
 }
 
-function drawPolyline() {
-    const polyLine = new Polyline(lineColor, clicks);
-    polyLine.draw();
-    clicks = [];
+function move() {
+  const movePoint = clicks.pop();
+  const figurePoint = clicks.pop();
+  const closestFigure = drawnFigures.reduce((closestFigure, currentFigure) => {
+    const currentClosestDistance = Point.getDistance(closestFigure.location(), figurePoint);
+    const currentFigureDistance = Point.getDistance(currentFigure.location(), figurePoint)
+
+    if (currentFigureDistance < currentClosestDistance) {
+      return currentFigure;
+    }
+    return closestFigure;
+  });
+
+  const newFigures = drawnFigures.filter(figure => figure !== closestFigure);
+  newFigures.push(closestFigure.move(movePoint));
+
+  redraw(newFigures);
+}
+
+function postDraw(newFigure) {
+  clicks = [];
+  drawnFigures.push(newFigure);
+  redraw(drawnFigures);
+}
+
+const figure1DFabric = new Figure1DFabric();
+const figure2DFabric = new Figure2DFabric();
+
+function drawFigure1D(event) {
+  const type = event.target.id;
+  const figure1D = figure1DFabric.get(type, lineColor, clicks);
+  figure1D.draw();
+  postDraw(figure1D);
+}
+
+function drawFigure2D(event) {
+  const type = event.target.id;
+  const figure2D = figure2DFabric.get(type, lineColor, fillColor, clicks);
+  figure2D.draw();
+  postDraw(figure2D);
+}
+
+function drawRegularPolygon(event) {
+  const sidesNumber = prompt("Please enter sides number:", 42);
+  const regularPolygon = new RegularPolygon(lineColor, fillColor, +sidesNumber, ...clicks);
+  regularPolygon.draw();
+  postDraw(regularPolygon);
 }

@@ -1,7 +1,7 @@
 window.Ellipse = class Ellipse extends Figure2D {
     constructor(lineColor, fillColor, upperLeftPoint, bottomRightPoint) {
         const center = Point.getMiddlePoint(upperLeftPoint, bottomRightPoint);
-        super(lineColor, center, fillColor);
+        super(lineColor, fillColor, center);
         this.firstPoint = upperLeftPoint;
         this.secondPoint = bottomRightPoint;
     }
@@ -29,6 +29,8 @@ window.Ellipse = class Ellipse extends Figure2D {
         this.setFirstPoint(Point.copy(this.getFirstPoint()).move(deltaX, deltaY));
         this.setSecondPoint(Point.copy(this.getSecondPoint()).move(deltaX, deltaY));
         this.setCenter(Point.copy(this.getFirstPoint()).move(deltaX, deltaY));
+
+        return this;
     }
 
     draw() {
@@ -36,7 +38,10 @@ window.Ellipse = class Ellipse extends Figure2D {
         const context = canvas.getContext('2d');
         const xR = Math.abs(this.secondPoint.x - this.firstPoint.x) / 2;
         const yR = Math.abs(this.secondPoint.y - this.firstPoint.y) / 2;
+        context.beginPath();
         context.ellipse(this.center.x, this.center.y, xR, yR, 0, 0, 2 * Math.PI);
         context.stroke();
+        context.fill();
+        context.closePath();
     }
 }

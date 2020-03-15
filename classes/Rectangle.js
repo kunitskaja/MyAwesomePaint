@@ -5,6 +5,6 @@ window.Rectangle = class Rectangle extends Polygon {
     points.push(new Point(firstPoint.x, secondPoint.y));
     points.push(secondPoint);
     points.push(new Point(secondPoint.x, firstPoint.y));
-    super(lineColor, fillColor, points);
+    super(lineColor, fillColor, ...points);
   }
 }

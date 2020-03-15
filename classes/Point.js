@@ -23,7 +23,7 @@ window.Point = class Point {
   draw() {
     const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
-    context.fillRect(this.x,this.y,3,3);
+    context.fillRect(this.x - 1.5, this.y - 1.5, 3, 3);
   }
 
   static getMiddlePoint(...points) {
